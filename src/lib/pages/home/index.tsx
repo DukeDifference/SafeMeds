@@ -1,4 +1,5 @@
-import { Flex } from "@chakra-ui/react";
+import { Button, Flex } from "@chakra-ui/react";
+import { signIn } from "next-auth/react";
 import { NextSeo } from "next-seo";
 
 import CTASection from "lib/components/samples/CTASection";
@@ -17,6 +18,14 @@ const Home = () => {
       w="full"
     >
       <NextSeo title="Home" />
+      <Button
+        onClick={(e) => {
+          e.preventDefault();
+          signIn("google");
+        }}
+      >
+        Sign in With Google
+      </Button>
       <SomeText />
       <SomeImage />
       <CTASection />

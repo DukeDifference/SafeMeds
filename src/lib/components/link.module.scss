@@ -1,0 +1,26 @@
+.link {
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom-color 50ms linear 0s;
+}
+
+.link:hover {
+  transform: translateY(-3px);
+  border-bottom-color: white;
+  border-bottom-width: 50%;
+  transition: 0.2s;
+}
+
+.link:visited {
+  text-decoration: none;
+}
+
+.link:active {
+  text-decoration: none;
+}
+
+.nodec {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
