@@ -5,18 +5,22 @@
 import { Flex } from "@chakra-ui/react";
 import { useState } from "react";
 
-import SomeImage from "lib/components/samples/SomeImage";
+import AuthenticationPage from "lib/components/home/AuthenticationPage";
+import HomePage from "lib/components/home/HomePage";
+import OnboardingPage from "lib/components/home/OnboardingPage";
 import SomeText from "lib/components/samples/SomeText";
 
 const Home = () => {
-  const [screenID, setScreenID] = useState(0);
+  const [screenID, setScreenID] = useState(2);
 
   function retrieveScreen() {
     switch (screenID) {
       case 0:
-        return <SomeText />;
+        return <HomePage />;
       case 1:
-        return <SomeImage />;
+        return <AuthenticationPage />;
+      case 2:
+        return <OnboardingPage />;
       default:
         return <SomeText />;
     }
