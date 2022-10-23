@@ -30,6 +30,8 @@ const recreateDb = async (req: NextApiRequest, res: NextApiResponse) => {
   await client.query(`
   CREATE TABLE IF NOT EXISTS public.drugs (
     id UUID NOT NULL DEFAULT gen_random_uuid(),
+    rxcui INT NOT NULL,
+    name VARCHAR(250) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     CONSTRAINT drugs_pkey PRIMARY KEY (id ASC)
   )
@@ -44,8 +46,6 @@ const recreateDb = async (req: NextApiRequest, res: NextApiResponse) => {
     CONSTRAINT fk_drugs FOREIGN KEY (drug_id) REFERENCES public.drugs(id)
   )
   `);
-  // rowid INT8 NOT VISIBLE NOT NULL DEFAULT unique_rowid(),
-  // CONSTRAINT user_drugs_pkey PRIMARY KEY (rowid ASC),
 
   res.statusCode = 200;
   res.json({ data: "ok" });
