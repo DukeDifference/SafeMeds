@@ -47,7 +47,6 @@ const OnboardingForm = () => {
       setFormState(formState + 1);
     } else {
       SetSubmitting(true);
-      console.log("sex ur mom");
     }
   };
 
