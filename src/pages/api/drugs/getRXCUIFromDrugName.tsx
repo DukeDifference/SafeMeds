@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import axios from "axios";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Client } from "pg";
@@ -23,17 +24,19 @@ const getRXCUIFromDrugName = async (
       drug = await insertDrugToDb(client, rxcui, name);
     }
     client.end();
-
+    console.log(drug);
     res.send({
       success: true,
       data: rxcui,
       drug: drug?.id,
+      name: drug?.name,
     });
   }
   res.send({
     success: false,
     data: 0,
     drug: 0,
+    name: "blank",
   });
 };
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {
   Button,
   Flex,
@@ -5,8 +6,11 @@ import {
   FormHelperText,
   Box,
   FormLabel,
+  Text,
   useToast,
   Heading,
+  Spacer,
+  Stack,
 } from "@chakra-ui/react";
 import {
   AutoComplete,
@@ -17,6 +21,7 @@ import {
 import axios from "axios";
 import type { SetStateAction } from "react";
 import { useEffect, useState } from "react";
+import { AiOutlinePlus } from "react-icons/ai";
 
 import type Drug from "lib/types/Drug";
 
@@ -29,6 +34,7 @@ const DrugSearch = () => {
   const [currInput, setInput] = useState("");
   const [drugs, setDrugs] = useState(["no drugs found"]);
   const [submitting, SetSubmitting] = useState(false);
+  const [submittingAdd, SetSubmittingAdd] = useState(false);
   const [returnData, SetReturnData] = useState<Drug | null>(null);
   const toast = useToast();
 
@@ -108,6 +114,7 @@ const DrugSearch = () => {
               }),
             });
             const js = await resp.json();
+            console.log(js);
             SetReturnData(js);
             if (js.success) {
               toast({
@@ -133,9 +140,23 @@ const DrugSearch = () => {
         </Button>
       </Flex>
       {returnData !== null && (
-        <Box outline="black 2px solid" p={10}>
-          <Heading>{returnData.name}</Heading>
-        </Box>
+        <Flex outline="black 2px solid" p={10}>
+          <Stack>
+            <Heading>{returnData.name}</Heading>
+            <Text>{returnData.rxcui}</Text>
+          </Stack>
+          <Spacer />
+          <Button
+            isLoading={submittingAdd}
+            onClick={() => {
+              SetSubmittingAdd(true);
+              fetch("");
+            }}
+            colorScheme="blue"
+            size="lg"
+            leftIcon={<AiOutlinePlus />}
+          />
+        </Flex>
       )}
     </Box>
   );
