@@ -5,8 +5,6 @@ import {
   FormControl,
   FormHelperText,
   Box,
-  FormLabel,
-  Text,
   useToast,
   Heading,
   Spacer,
@@ -23,7 +21,11 @@ import type { SetStateAction } from "react";
 import { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 
-import type Drug from "lib/types/Drug";
+type ReturnDrug = {
+  name: string;
+  drug: string;
+  data: string;
+};
 
 const AUTOCOMPLETE_URL =
   "https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search";
@@ -35,7 +37,7 @@ const DrugSearch = () => {
   const [drugs, setDrugs] = useState(["no drugs found"]);
   const [submitting, SetSubmitting] = useState(false);
   const [submittingAdd, SetSubmittingAdd] = useState(false);
-  const [returnData, SetReturnData] = useState<Drug | null>(null);
+  const [returnData, SetReturnData] = useState<ReturnDrug | null>(null);
   const toast = useToast();
 
   useEffect(() => {
@@ -69,7 +71,7 @@ const DrugSearch = () => {
         w="full"
       >
         <FormControl>
-          <FormLabel>Drug Search</FormLabel>
+          <Heading>Drug Search</Heading>
           <AutoComplete rollNavigation>
             <AutoCompleteInput
               variant="filled"
@@ -143,14 +145,38 @@ const DrugSearch = () => {
         <Flex outline="black 2px solid" p={10}>
           <Stack>
             <Heading>{returnData.name}</Heading>
-            <Text>{returnData.rxcui}</Text>
           </Stack>
           <Spacer />
           <Button
             isLoading={submittingAdd}
-            onClick={() => {
+            onClick={async () => {
               SetSubmittingAdd(true);
-              fetch("");
+              const r = await fetch("/api/drugs/postUserDrug", {
+                method: "POST",
+                body: JSON.stringify({
+                  drug_id: returnData.drug,
+                  ooga: "booga",
+                }),
+              });
+              const js = await r.json();
+              if (js.status) {
+                toast({
+                  title: "Added the drug to your collection!",
+                  description: `Head to the dashboard!`,
+                  status: "success",
+                  duration: 9000,
+                  isClosable: true,
+                });
+              } else {
+                toast({
+                  title: "Error adding drug",
+                  description: "Not supposed to happen. Contact developers",
+                  status: "error",
+                  duration: 9000,
+                  isClosable: true,
+                });
+              }
+              SetSubmittingAdd(false);
             }}
             colorScheme="blue"
             size="lg"

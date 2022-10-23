@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import Auth0Provider from "next-auth/providers/auth0";
+
 // import EmailProvider from "next-auth/providers/email"
 // import AppleProvider from "next-auth/providers/apple"
 
@@ -74,13 +75,13 @@ export default NextAuth({
   // The routes shown here are the default URLs that will be used when a custom
   // pages is not specified for that route.
   // https://next-auth.js.org/configuration/pages
-  // pages: {
-  // signIn: '/auth/signin',  // Displays signin buttons
-  // signOut: '/auth/signout', // Displays form with sign out button
-  // error: '/auth/error', // Error code passed in query string as ?error=
-  // verifyRequest: '/auth/verify-request', // Used for check email page
-  // newUser: null // If set, new users will be directed here on first sign in
-  // },
+  pages: {
+    // signIn: '/auth/signin',  // Displays signin buttons
+    // signOut: '/auth/signout', // Displays form with sign out button
+    // error: '/auth/error', // Error code passed in query string as ?error=
+    // verifyRequest: '/auth/verify-request', // Used for check email page
+    newUser: "/secret-form", // If set, new users will be directed here on first sign in
+  },
 
   // Callbacks are asynchronous functions you can use to control what happens
   // when an action is performed.
@@ -89,7 +90,7 @@ export default NextAuth({
     // async signIn({ user, account, profile, email, credentials }) {},
     // async redirect({ url, baseUrl }) { return baseUrl },
     // async session({ session, token, user }) { return session },
-    // async jwt({ token, user, account, profile, isNewUser }) { return token }
+    // async jwt({ token, user, account, profile, isNewUser }) {},
   },
 
   // Events are useful for logging

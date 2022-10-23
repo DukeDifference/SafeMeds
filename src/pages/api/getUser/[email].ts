@@ -20,10 +20,11 @@ export default async function handler(
   const user = await getUser(client, cleanedEmail);
   if (user === null) {
     // TODO: Redirect to login form
-    res.status(500);
+    res.status(200);
+    res.send({ status: false, data: null });
     return;
   }
 
   res.status(200);
-  res.json(user);
+  res.send({ status: true, data: user });
 }

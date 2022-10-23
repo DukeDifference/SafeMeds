@@ -25,14 +25,14 @@ const getRXCUIFromDrugName = async (
     }
     client.end();
     console.log(drug);
-    res.send({
+    return res.send({
       success: true,
       data: rxcui,
       drug: drug?.id,
       name: drug?.name,
     });
   }
-  res.send({
+  return res.send({
     success: false,
     data: 0,
     drug: 0,

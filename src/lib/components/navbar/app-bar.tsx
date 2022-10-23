@@ -126,7 +126,7 @@ export default function AppBar({ onOpen, ...rest }: AppBarProps) {
         <NextLink url="/">
           <MenuItems>Home</MenuItems>
         </NextLink>
-        <ExtLink url="https://github.com/Daggy1234/dagpi">
+        <ExtLink url="https://github.com/DukeDifference/SafeMeds">
           <MenuItems>Github</MenuItems>
         </ExtLink>
         <MenuItems>

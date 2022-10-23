@@ -49,23 +49,21 @@ export default function MyDrawer({ isOpen, onClose }: MyDrawerProps) {
                 variant="outline"
                 borderColor="white"
                 leftIcon={<MdDashboard />}
-                color="purple.500"
-                bg="purple.100"
-                _hover={{ bg: "#8a897c", color: "white" }}
+                colorScheme="blue"
                 border="1px"
               >
                 Dashboard
               </Button>
             </Link>
             {status === "loading" && (
-              <Button border="1px" colorScheme="purple" isLoading>
+              <Button border="1px" colorScheme="blue" isLoading>
                 Loading..
               </Button>
             )}
             {!session ? (
               <Button
                 border="1px"
-                colorScheme="purple"
+                colorScheme="blue"
                 onClick={(e) => {
                   e.preventDefault();
                   signIn("discord");
@@ -75,7 +73,7 @@ export default function MyDrawer({ isOpen, onClose }: MyDrawerProps) {
               </Button>
             ) : (
               <>
-                <Button colorScheme="purple" onClick={handleToggle}>
+                <Button colorScheme="blue" onClick={handleToggle}>
                   <Image
                     boxSize="2rem"
                     borderRadius="full"
@@ -83,6 +81,7 @@ export default function MyDrawer({ isOpen, onClose }: MyDrawerProps) {
                     alt={session.user?.name?.toString()}
                     mr="60px"
                   />
+                  Profile
                   {show ? <FaChevronUp /> : <FaChevronDown />}
                 </Button>
                 <Collapse in={show} animateOpacity>
