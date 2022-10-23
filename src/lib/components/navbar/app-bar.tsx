@@ -69,7 +69,7 @@ export default function AppBar({ onOpen, ...rest }: AppBarProps) {
           letterSpacing="-.1rem"
         >
           <Link href="/">
-            <a className={styles.nodec}>SafeMed</a>
+            <a className={styles.nodec}>SafeMeds</a>
           </Link>
         </Heading>
       </Flex>

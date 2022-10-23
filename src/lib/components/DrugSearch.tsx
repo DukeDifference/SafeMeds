@@ -1,11 +1,10 @@
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
+  Button,
   Flex,
   FormControl,
   FormHelperText,
   FormLabel,
-  Input,
+  useToast,
 } from "@chakra-ui/react";
 import {
   AutoComplete,
@@ -25,6 +24,8 @@ const MIN_DRUG_NAME_LENGTH = 3;
 const DrugSearch = () => {
   const [currInput, setInput] = useState("");
   const [drugs, setDrugs] = useState(["no drugs found"]);
+  const [submitting, SetSubmitting] = useState(false);
+  const toast = useToast();
 
   useEffect(() => {
     if (currInput.length >= MIN_DRUG_NAME_LENGTH) {
@@ -39,17 +40,23 @@ const DrugSearch = () => {
 
           const drugNamesArray: string[] = Array.from(drugNames);
           drugNamesArray.sort();
-          setDrugs(drugNamesArray.slice(0, 10));
+          setDrugs([currInput].concat(drugNamesArray.slice(0, 9)));
         })
-        .catch(() => setDrugs([]));
+        .catch(() => setDrugs([currInput]));
     } else {
-      setDrugs([]);
+      setDrugs([currInput]);
     }
   }, [currInput]);
 
   return (
-    <Flex pt="48" justify="center" align="center" w="full">
-      <FormControl w="60">
+    <Flex
+      py={8}
+      px={{ base: 8, md: 20 }}
+      justify="center"
+      align="center"
+      w="full"
+    >
+      <FormControl>
         <FormLabel>Drug Search</FormLabel>
         <AutoComplete rollNavigation>
           <AutoCompleteInput
@@ -68,6 +75,9 @@ const DrugSearch = () => {
                 key={`option-${drug_index}`}
                 value={drug}
                 textTransform="capitalize"
+                onClick={() => {
+                  setInput(drug);
+                }}
               >
                 {drug}
               </AutoCompleteItem>
@@ -79,6 +89,41 @@ const DrugSearch = () => {
           simplest one.
         </FormHelperText>
       </FormControl>
+      <Button
+        type="submit"
+        isLoading={submitting}
+        colorScheme="blue"
+        onClick={async () => {
+          SetSubmitting(true);
+          const resp = await fetch("/api/drugs/getRXCUIFromDrugName", {
+            method: "POST",
+            body: JSON.stringify({
+              name: currInput,
+            }),
+          });
+          const js = await resp.json();
+          if (js.success) {
+            toast({
+              title: "Got Drug ID!",
+              description: `Got ${js.data}`,
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+          } else {
+            toast({
+              title: "Unable to Find Drug",
+              description: "no results",
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
+          }
+          SetSubmitting(false);
+        }}
+      >
+        Search
+      </Button>
     </Flex>
   );
 };
