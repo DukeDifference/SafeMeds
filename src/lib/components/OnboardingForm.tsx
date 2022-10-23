@@ -268,7 +268,7 @@ const OnboardingForm = () => {
       direction="column"
       alignItems="center"
       justifyContent="center"
-      minHeight="70vh"
+      minHeight="25vh"
       gap={4}
       mb={8}
       w="full"

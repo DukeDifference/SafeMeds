@@ -25,7 +25,9 @@ const Page = () => {
       justifyContent="center"
       minHeight="70vh"
       gap={4}
-      my={8}
+      mx={4}
+      mt={16}
+      mb={8}
       w="full"
     >
       <Heading>Just fill our form to get started!</Heading>
