@@ -43,3 +43,9 @@ sitemap*.xml
 
 # TS
 *.tsbuildinfo
+
+# SQL Tools
+*.session.sql
+
+# VSCode
+.vscode
