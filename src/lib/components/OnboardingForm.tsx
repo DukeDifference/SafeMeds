@@ -14,6 +14,7 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { Field, Form, Formik } from "formik";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import * as Yup from "yup";
 
@@ -38,6 +39,7 @@ const validation = Yup.object().shape({
 const OnboardingForm = () => {
   const [formState, setFormState] = useState(0);
   const [submitting, SetSubmitting] = useState(false);
+  const router = useRouter();
   const toast = useToast();
 
   const handleNextPage = () => {
@@ -88,6 +90,7 @@ const OnboardingForm = () => {
               duration: 9000,
               isClosable: true,
             });
+            router.push("/");
           } else {
             toast({
               title: "Error inserting User",
@@ -96,6 +99,7 @@ const OnboardingForm = () => {
               duration: 9000,
               isClosable: true,
             });
+            router.push("/");
           }
         }}
         validationSchema={validation}

@@ -41,8 +41,10 @@ export default function MyDrawer({ isOpen, onClose }: MyDrawerProps) {
 
         <DrawerBody mr="30px">
           <VStack spacing={5} align="stretch" textAlign="center">
-            <NextLink url="/playground">Home</NextLink>
-            <ExtLink url="https://github.com/Daggy1234/dagpi">Github</ExtLink>
+            <NextLink url="/">Home</NextLink>
+            <ExtLink url="https://github.com/DukeDifference/SafeMeds">
+              Github
+            </ExtLink>
 
             <Link href="/dashboard">
               <Button
