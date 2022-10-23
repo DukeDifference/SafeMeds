@@ -1,7 +1,10 @@
+import type Uuid from "lib/types/Uuid";
+
 import type Email from "./Email";
 import type Sex from "./Sex";
 
 type User = {
+  id?: Uuid;
   firstName: string;
   lastName: string;
   sex: Sex;

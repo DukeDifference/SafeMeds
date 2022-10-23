@@ -22,7 +22,6 @@ const recreateDb = async (req: NextApiRequest, res: NextApiResponse) => {
     consumes_alcohol BOOL NOT NULL,
     consumes_nicotine BOOL NOT NULL,
     consumes_caffeine BOOL NOT NULL,
-    is_pregnant BOOL NOT NULL,
     CONSTRAINT users_pkey PRIMARY KEY (id ASC)
   )
   `);
@@ -30,7 +29,7 @@ const recreateDb = async (req: NextApiRequest, res: NextApiResponse) => {
   await client.query(`
   CREATE TABLE IF NOT EXISTS public.drugs (
     id UUID NOT NULL DEFAULT gen_random_uuid(),
-    rxcui INT NOT NULL,
+    rxcui INT UNIQUE NOT NULL,
     name VARCHAR(250) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     CONSTRAINT drugs_pkey PRIMARY KEY (id ASC)
