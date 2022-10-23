@@ -15,5 +15,5 @@ Drugs may be added through the search bar. The drug-drug interactions documented
 - Vercel
 
 ## Screenshots
-![comparison](images/original.png)
-![mobile](images/gallery.jpg)
+![comparison](original.png)
+![mobile](gallery.jpg)
