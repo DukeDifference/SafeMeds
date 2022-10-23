@@ -40,8 +40,14 @@ const DrugSearch = () => {
   }, [currInput]);
 
   return (
-    <Flex pt="48" justify="center" align="center" w="full">
-      <FormControl w="60">
+    <Flex
+      py={8}
+      px={{ base: 8, md: 20 }}
+      justify="center"
+      align="center"
+      w="full"
+    >
+      <FormControl>
         <FormLabel>Drug Search</FormLabel>
         <AutoComplete rollNavigation>
           <AutoCompleteInput
