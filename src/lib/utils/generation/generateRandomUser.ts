@@ -1,10 +1,9 @@
 import { faker } from "@faker-js/faker";
 import type { Client } from "pg";
 
-import type Sex from "../types/Sex";
-import type User from "../types/User";
-
-import insertUserToDb from "./insertUserToDb";
+import type Sex from "../../types/Sex";
+import type User from "../../types/User";
+import insertUserToDb from "../db/insertUserToDb";
 
 const generateRandomUser = async (client: Client) => {
   const sex = ["M", "F", "O"][Math.floor(Math.random() * 3)] as Sex;

@@ -1,11 +1,7 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Client } from "pg";
 
-import generateRandomUsers from "../../lib/utils/generateRandomUsers";
-
-const db = async (req: NextApiRequest, res: NextApiResponse) => {
+const recreateDb = async (req: NextApiRequest, res: NextApiResponse) => {
   const client = new Client(process.env.DATABASE_URL);
   await client.connect();
 
@@ -20,9 +16,9 @@ const db = async (req: NextApiRequest, res: NextApiResponse) => {
     first_name VARCHAR(128) NOT NULL,
     last_name VARCHAR(128) NOT NULL,
     sex SEX NOT NULL,
-    date_of_birth Date NOT NULL,
+    date_of_birth DATE NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-    email VARCHAR(256) NOT NULL,
+    email VARCHAR(256) UNIQUE NOT NULL,
     consumes_alcohol BOOL NOT NULL,
     consumes_nicotine BOOL NOT NULL,
     consumes_caffeine BOOL NOT NULL,
@@ -44,23 +40,16 @@ const db = async (req: NextApiRequest, res: NextApiResponse) => {
     user_id UUID NOT NULL,
     drug_id UUID NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-    rowid INT8 NOT VISIBLE NOT NULL DEFAULT unique_rowid(),
-    CONSTRAINT user_drugs_pkey PRIMARY KEY (rowid ASC),
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES public.users(id),
     CONSTRAINT fk_drugs FOREIGN KEY (drug_id) REFERENCES public.drugs(id)
   )
   `);
+  // rowid INT8 NOT VISIBLE NOT NULL DEFAULT unique_rowid(),
+  // CONSTRAINT user_drugs_pkey PRIMARY KEY (rowid ASC),
 
-  try {
-    const users = await generateRandomUsers(client);
-    res.statusCode = 200;
-    res.json({ date: users });
-  } catch (err) {
-    res.statusCode = 500;
-    res.json(err);
-  } finally {
-    client.end();
-  }
+  res.statusCode = 200;
+  res.json({ data: "ok" });
+  client.end();
 };
 
-export default db;
+export default recreateDb;

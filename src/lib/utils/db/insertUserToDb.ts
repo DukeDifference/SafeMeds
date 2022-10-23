@@ -1,6 +1,6 @@
 import type { Client } from "pg";
 
-import type User from "../types/User";
+import type User from "../../types/User";
 
 const insertUserToDb = async (client: Client, user: User) => {
   await client.query(
