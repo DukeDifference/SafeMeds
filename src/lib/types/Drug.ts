@@ -1,7 +1,5 @@
-import type Uuid from "./Uuid";
-
 type Drug = {
-  id?: Uuid;
+  id?: string;
   rxcui: number;
   name: string;
 };

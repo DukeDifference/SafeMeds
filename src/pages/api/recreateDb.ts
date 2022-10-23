@@ -5,9 +5,9 @@ const recreateDb = async (req: NextApiRequest, res: NextApiResponse) => {
   const client = new Client(process.env.DATABASE_URL);
   await client.connect();
 
-  await client.query("DROP TABLE public.user_drugs;");
-  await client.query("DROP TABLE public.users;");
-  await client.query("DROP TABLE public.drugs;");
+  await client.query("DROP TABLE IF EXISTS public.user_drugs;");
+  await client.query("DROP TABLE IF EXISTS public.users;");
+  await client.query("DROP TABLE IF EXISTS public.drugs;");
   await client.query("CREATE TYPE IF NOT EXISTS sex AS ENUM ('M', 'F', 'O')");
 
   await client.query(`
