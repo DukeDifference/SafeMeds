@@ -1,12 +1,4 @@
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import {
-  Flex,
-  FormControl,
-  FormHelperText,
-  FormLabel,
-  Input,
-} from "@chakra-ui/react";
+import { Flex, FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
 import {
   AutoComplete,
   AutoCompleteInput,
@@ -39,11 +31,11 @@ const DrugSearch = () => {
 
           const drugNamesArray: string[] = Array.from(drugNames);
           drugNamesArray.sort();
-          setDrugs(drugNamesArray.slice(0, 10));
+          setDrugs([currInput].concat(drugNamesArray.slice(0, 9)));
         })
-        .catch(() => setDrugs([]));
+        .catch(() => setDrugs([currInput]));
     } else {
-      setDrugs([]);
+      setDrugs([currInput]);
     }
   }, [currInput]);
 
