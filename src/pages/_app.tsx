@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable react/jsx-props-no-spreading */
+import { SessionProvider } from "next-auth/react";
 import { DefaultSeo } from "next-seo";
 import type { AppProps } from "next/app";
 import Head from "next/head";
@@ -18,9 +20,14 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         />
       </Head>
       <DefaultSeo {...defaultSEOConfig} />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <SessionProvider
+        // @ts-ignore */
+        session={pageProps.session}
+      >
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </SessionProvider>
     </Chakra>
   );
 };
