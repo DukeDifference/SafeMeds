@@ -7,9 +7,9 @@ const getUserDrugs = async (client: Client, userId: Uuid) => {
     await client.query(
       `
   SELECT * FROM user_drugs
-  WHERE user_id = $1
   INNER JOIN drugs
   ON drug_id = drugs.id;
+  AND user_id = $1
   `,
       [userId.id]
     )
