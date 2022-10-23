@@ -9,11 +9,10 @@ const getDrugFromRxcui = async (
   const drug = (
     await client.query(
       `
-    SELECT 1
-    FROM table_name
-    WHERE rxcui = rxcui
-    VALUES($1)
-    RETURNS (id, rxcui, name);
+    SELECT *
+    FROM drugs
+    WHERE rxcui = $1
+    LIMIT 1;
   `,
       [rxcui]
     )

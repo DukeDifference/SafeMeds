@@ -2,8 +2,8 @@ import axios from "axios";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Client } from "pg";
 
-import getDrugFromRxcui from "../../../lib/utils/db/getDrugFromRxcui";
 import insertDrugToDb from "../../../lib/utils/db/insertDrugToDb";
+import getDrugFromRxcui from "lib/utils/db/getDrugFromRxcui";
 
 const getRXCUIFromDrugName = async (
   req: NextApiRequest,
