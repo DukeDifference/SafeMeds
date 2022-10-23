@@ -6,8 +6,10 @@ const getUserDrugs = async (client: Client, userId: Uuid) => {
   return (
     await client.query(
       `
-  SELECT drug_id FROM user_drugs
+  SELECT * FROM user_drugs
   WHERE user_id = $1
+  INNER JOIN drugs
+  ON drug_id = drugs.id;
   `,
       [userId.id]
     )
