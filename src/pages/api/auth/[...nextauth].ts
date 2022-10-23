@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
+import Auth0Provider from "next-auth/providers/auth0";
 // import EmailProvider from "next-auth/providers/email"
 // import AppleProvider from "next-auth/providers/apple"
 
@@ -21,10 +21,11 @@ export default NextAuth({
     //     keyId: process.env.APPLE_KEY_ID,
     //   },
     // }),
-    GoogleProvider({
-      clientId:
-        "1092477677810-58pprge2iv6fshbisnsup1o28ghvlad2.apps.googleusercontent.com",
-      clientSecret: "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",
+    Auth0Provider({
+      clientId: "I4rfjs7oCWeyLHyDFqHbhFrH7feavqDS",
+      clientSecret:
+        "EVVg8IoS6c1gCM7jJY79N7kWXElOPOu9yoEJnNqIVNxGeN6DREvMWmpzUEH93UsO",
+      issuer: "https://dev-3qyggylb1240bf0k.us.auth0.com",
     }),
   ],
   // Database optional. MySQL, Maria DB, Postgres and MongoDB are supported.

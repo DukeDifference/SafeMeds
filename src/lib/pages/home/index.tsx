@@ -1,34 +1,13 @@
-import { Button, Flex } from "@chakra-ui/react";
-import { signIn } from "next-auth/react";
+import { Flex } from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
 
-import CTASection from "lib/components/samples/CTASection";
-import SomeImage from "lib/components/samples/SomeImage";
-import SomeText from "lib/components/samples/SomeText";
+import DrugSearch from "lib/components/DrugSearch";
 
 const Home = () => {
   return (
-    <Flex
-      direction="column"
-      alignItems="center"
-      justifyContent="center"
-      minHeight="70vh"
-      gap={4}
-      mb={8}
-      w="full"
-    >
+    <Flex direction="column" w="full">
       <NextSeo title="Home" />
-      <Button
-        onClick={(e) => {
-          e.preventDefault();
-          signIn("google");
-        }}
-      >
-        Sign in With Google
-      </Button>
-      <SomeText />
-      <SomeImage />
-      <CTASection />
+      <DrugSearch />
     </Flex>
   );
 };
