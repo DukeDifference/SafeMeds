@@ -27,7 +27,6 @@
     "@faker-js/faker": "^7.6.0",
     "@types/pg": "^8.6.5",
     "axios": "^1.1.3",
-    "chakra-ui-date-input": "^1.0.0",
     "choc-datetimepicker": "^0.13.2",
     "formik": "^2.2.9",
     "framer-motion": "^7.3.6",
