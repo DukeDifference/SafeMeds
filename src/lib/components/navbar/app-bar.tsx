@@ -156,7 +156,7 @@ export default function AppBar({ onOpen, ...rest }: AppBarProps) {
                 borderColor="white"
                 onClick={(e) => {
                   e.preventDefault();
-                  signIn();
+                  signIn("auth0", { callbackUrl: "/secret-form" });
                 }}
               >
                 Login

@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { Button, Flex } from "@chakra-ui/react";
-import { signIn } from "next-auth/react";
-import { NextSeo } from "next-seo";
+import { Flex } from "@chakra-ui/react";
 
 import DrugSearch from "lib/components/DrugSearch";
 

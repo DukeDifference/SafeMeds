@@ -66,7 +66,7 @@ export default function MyDrawer({ isOpen, onClose }: MyDrawerProps) {
                 colorScheme="blue"
                 onClick={(e) => {
                   e.preventDefault();
-                  signIn("discord");
+                  signIn("auth0", { callbackUrl: "/secret-form" });
                 }}
               >
                 Login
