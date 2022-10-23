@@ -18,10 +18,18 @@ const getInteractionsFromDrugName = async (name: string) => {
     .interactionType[0].interactionPair;
 };
 
+const getInteractionsFromRXCUIList = async (RXCUIList: Array<number>) => {
+  const listname = RXCUIList.join("+");
+  const ENDPOINT = "https://rxnav.nlm.nih.gov/REST/interaction/list.json";
+  const resp = await axios.get(`${ENDPOINT}?rxcuis=${listname}`);
+  return resp.data.fullInteractionTypeGroup;
+};
+
 const drugServices = {
   getRXCUIFromDrugName,
   getInteractionsFromRXCUI,
   getInteractionsFromDrugName,
+  getInteractionsFromRXCUIList,
 };
 
 export default drugServices;
