@@ -1,4 +1,11 @@
-import { Flex, FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  useToast,
+} from "@chakra-ui/react";
 import {
   AutoComplete,
   AutoCompleteInput,
@@ -17,6 +24,8 @@ const MIN_DRUG_NAME_LENGTH = 3;
 const DrugSearch = () => {
   const [currInput, setInput] = useState("");
   const [drugs, setDrugs] = useState(["no drugs found"]);
+  const [submitting, SetSubmitting] = useState(false);
+  const toast = useToast();
 
   useEffect(() => {
     if (currInput.length >= MIN_DRUG_NAME_LENGTH) {
@@ -66,6 +75,9 @@ const DrugSearch = () => {
                 key={`option-${drug_index}`}
                 value={drug}
                 textTransform="capitalize"
+                onClick={() => {
+                  setInput(drug);
+                }}
               >
                 {drug}
               </AutoCompleteItem>
@@ -77,6 +89,41 @@ const DrugSearch = () => {
           simplest one.
         </FormHelperText>
       </FormControl>
+      <Button
+        type="submit"
+        isLoading={submitting}
+        colorScheme="blue"
+        onClick={async () => {
+          SetSubmitting(true);
+          const resp = await fetch("/api/drugs/getRXCUIFromDrugName", {
+            method: "POST",
+            body: JSON.stringify({
+              name: currInput,
+            }),
+          });
+          const js = await resp.json();
+          if (js.success) {
+            toast({
+              title: "Got Drug ID!",
+              description: `Got ${js.data}`,
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+          } else {
+            toast({
+              title: "Unable to Find Drug",
+              description: "no results",
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
+          }
+          SetSubmitting(false);
+        }}
+      >
+        Search
+      </Button>
     </Flex>
   );
 };
