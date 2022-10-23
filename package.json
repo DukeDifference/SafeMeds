@@ -29,6 +29,7 @@
     "axios": "^1.1.3",
     "chakra-ui-date-input": "^1.0.0",
     "choc-datetimepicker": "^0.13.2",
+    "formik": "^2.2.9",
     "framer-motion": "^7.3.6",
     "moedim": "^0.5.0",
     "next": "^12.3.1",
@@ -43,7 +44,8 @@
     "react-icons": "^4.4.0",
     "sass": "^1.55.0",
     "sassy-datepicker": "^0.10.1",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^17.1.0",

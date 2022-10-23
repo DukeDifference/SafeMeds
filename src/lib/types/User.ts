@@ -10,6 +10,5 @@ type User = {
   consumesAlcohol: boolean;
   consumesCaffeine: boolean;
   consumesNicotine: boolean;
-  isPregnant: boolean;
 };
 export default User;

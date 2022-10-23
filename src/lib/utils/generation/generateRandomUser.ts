@@ -16,7 +16,6 @@ const generateRandomUser = async (client: Client) => {
     consumesAlcohol: faker.datatype.boolean(),
     consumesCaffeine: faker.datatype.boolean(),
     consumesNicotine: faker.datatype.boolean(),
-    isPregnant: faker.datatype.boolean(),
   };
   await insertUserToDb(client, user);
   return user;
