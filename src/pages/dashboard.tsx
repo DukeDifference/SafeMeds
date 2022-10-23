@@ -158,7 +158,7 @@ const Page = () => {
                   {(
                     (new Date() - new Date(content.dateOfBirth)) /
                     31536000000
-                  ).toFixed(2)}{" "}
+                  ).toFixed(0)}{" "}
                   years
                 </Text>
                 <Text>
