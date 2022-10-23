@@ -18,20 +18,22 @@ const getRXCUIFromDrugName = async (
 
     const client = new Client(process.env.DATABASE_URL);
     client.connect();
-    const drug = await getDrugFromRxcui(client, rxcui);
+    let drug = await getDrugFromRxcui(client, rxcui);
     if (drug === null) {
-      insertDrugToDb(client, rxcui, name);
+      drug = await insertDrugToDb(client, rxcui, name);
     }
     client.end();
 
     res.send({
       success: true,
       data: rxcui,
+      drug: drug?.id,
     });
   }
   res.send({
     success: false,
     data: 0,
+    drug: 0,
   });
 };
 
